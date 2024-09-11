@@ -24,15 +24,15 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="bg-white py-10">
-      <div className="container py-10 mx-auto px-6">
+    <section className="bg-gray-800 py-10">
+      <div className="container py-10 mx-auto px-6 my-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div key={index} className="flex items-center space-x-4">
-                <div className="p-4 bg-gray-100 rounded-full">{feature.icon}</div>
+                <div className="p-4 bg-gray-900 text-indigo-500 rounded-full">{feature.icon}</div>
               <div>
-                <h3 className="text-xl font-bold">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-xl font-bold text-white">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
               </div>
             </div>
           ))}

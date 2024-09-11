@@ -1,52 +1,83 @@
-import { useState } from 'react';
-// import logo from './logo.png'; 
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginPage = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Email:', email, 'Password:', password);
+    console.log("Username:", formData.username);
+    console.log("Password:", formData.password);
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-800">
-      <div className="bg-gray-700 p-8 rounded-lg shadow-md w-96">
-        {/* <img src={logo} alt="Oceans Edge Logo" className="mx-auto mb-6" /> */}
-        <h2 className="text-2xl text-white font-bold text-center">Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mt-4">
-            <label htmlFor="email" className="block text-white">Email</label>
+    <div className="flex items-center justify-center bg-gray-900 bg-fixed bg-cover bg-blur-sm" style={{minHeight:"80vh"}}>
+      <div className="w-full max-w-sm p-8 bg-gray-800 bg-opacity-80 backdrop-blur-sm shadow-lg ">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold mb-2 text-white">Client Portal</h1>
+          <p className="text-gray-300">Please log in to schedule your appointment</p>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="username" className="block text-sm font-medium text-white">
+              Username
+            </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-indigo-500"
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600  shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out"
             />
           </div>
-          <div className="mt-4">
-            <label htmlFor="password" className="block text-white">Password</label>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-white">
+              Password
+            </label>
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-indigo-500"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600  shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-500 text-white font-bold py-2 rounded-md mt-6 hover:bg-indigo-700"
+            className="w-full px-4 py-2 text-white bg-indigo-600  shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 ease-in-out"
           >
-            Login
+            Log In
           </button>
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-400">
+              Don't have an account?{" "}
+              <Link
+                to="/client/signup"
+                className="text-blue-400 hover:text-blue-500 font-medium"
+              >
+                Sign up
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;
